@@ -156,15 +156,10 @@ namespace agg
         //--------------------------------------------------------------------
         color_type pixel(int x, int y) const
         {
-            first_clip_box();
-            do
+            if(m_ren.inbox(x, y))
             {
-                if(m_ren.inbox(x, y))
-                {
-                    return m_ren.ren().pixel(x, y);
-                }
+                return m_ren.ren().pixel(x, y);
             }
-            while(next_clip_box());
             return color_type::no_color();
         }
 
