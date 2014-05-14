@@ -1,6 +1,6 @@
 SUBDIRS = ctrl . platform
 
-INCLUDES = -I$(top_srcdir)/include
+AM_CPPFLAGS = -I$(top_srcdir)/include
 
 lib_LTLIBRARIES = libagg.la
 

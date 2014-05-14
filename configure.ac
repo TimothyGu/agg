@@ -1,32 +1,28 @@
-AC_INIT(src/agg_arc.cpp) # give me a source file, any source file...
+AC_INIT([mumble], [2.4.0])
+AC_CONFIG_SRCDIR(src/agg_arc.cpp)
 AC_CANONICAL_TARGET
 AC_CONFIG_HEADERS(include/config.h)
-AM_INIT_AUTOMAKE(agg, 2.4.0)
+AM_INIT_AUTOMAKE
 
 
 dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_CXX
-AC_ISC_POSIX
-AM_C_PROTOTYPES
-if test "x$U" != "x"; then
-  AC_MSG_ERROR(Compiler not ANSI compliant)
-fi
-AM_PROG_LIBTOOL
 AC_PROG_INSTALL
+LT_INIT
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 
 AC_ARG_ENABLE(examples,
-    AC_HELP_STRING([--enable-examples],[Antigrain examples]))
+    AS_HELP_STRING([--enable-examples],[Antigrain examples]))
 AM_CONDITIONAL(ENABLE_EXAMPLES,test x$enable_examples != xno)
 
 AC_ARG_ENABLE(ctrl,
-    AC_HELP_STRING([--enable-ctrl],[a gui libray used in examples]))
+    AS_HELP_STRING([--enable-ctrl],[a gui libray used in examples]))
 
 AC_ARG_ENABLE(platform,
-    AC_HELP_STRING([--enable-platform],[portable platform layers]))
+    AS_HELP_STRING([--enable-platform],[portable platform layers]))
 
 if test x$enable_examples != xno  ; then 
   enable_platform="yes"
@@ -63,7 +59,7 @@ AM_CONDITIONAL(ENABLE_WIN32,[test x$win32_host = xyes -a x$enable_platform != xn
 AM_CONDITIONAL(ENABLE_OSX,[test x$osx_host = xyes -a x$enable_platform != xno ])
 dnl then enable font_win32tt
 AC_ARG_ENABLE(win32tt,
-    AC_HELP_STRING([--enable-win32tt],[Win32 TrueType font support library]),
+    AS_HELP_STRING([--enable-win32tt],[Win32 TrueType font support library]),
     enable_tt=$enable_win32tt,
     enable_tt=$win32_host)
 AM_CONDITIONAL(ENABLE_WIN32_TT, test x$enable_tt = xyes )
@@ -76,7 +72,7 @@ PKG_CHECK_MODULES([FREETYPE],
     AC_MSG_WARN([*** Freetype2 not found! Building without font library.])
     )
 AC_ARG_ENABLE(freetype,
-    AC_HELP_STRING([--enable-freetype],[freetype font support library]),
+    AS_HELP_STRING([--enable-freetype],[freetype font support library]),
     ft_enabled=$enable_freetype)
 
 AM_CONDITIONAL(ENABLE_FT,[test xyes = x$ft_enabled])
@@ -85,7 +81,7 @@ dnl ###############################################
 
 dnl #########  Ask for GPC: #######################
 AC_ARG_ENABLE(gpc,
-    AC_HELP_STRING([--enable-gpc],[gpc polygon clipper library]) ) 
+    AS_HELP_STRING([--enable-gpc],[gpc polygon clipper library]) ) 
 
 AM_CONDITIONAL(ENABLE_GPC,[test xyes = x$enable_gpc])
 dnl ###############################################

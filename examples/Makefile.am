@@ -14,7 +14,7 @@ if ENABLE_GPC
 GPCP=gpc_test
 endif
 
-INCLUDES=-I$(top_srcdir)/include -I$(top_srcdir)/font_freetype/ -I$(top_srcdir)/gpc -I$(top_srcdir)/font_win32_tt
+AM_CPPFLAGS=-I$(top_srcdir)/include -I$(top_srcdir)/font_freetype/ -I$(top_srcdir)/gpc -I$(top_srcdir)/font_win32_tt
 
 noinst_LTLIBRARIES=libexamples.la
 libexamples_la_SOURCES=parse_lion.cpp make_gb_poly.cpp make_arrows.cpp interactive_polygon.cpp

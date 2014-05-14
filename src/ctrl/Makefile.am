@@ -1,5 +1,5 @@
 if ENABLE_CTRL
-INCLUDES = -I$(top_srcdir)/include
+AM_CPPFLAGS = -I$(top_srcdir)/include
 
 noinst_LTLIBRARIES = libaggctrl.la
 
