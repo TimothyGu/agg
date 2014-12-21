@@ -94,8 +94,8 @@ namespace agg
     {
         void operator()(void* dst, const void* src, unsigned width) const
         {
-            DstFormat::pixel_type* dst_pix = DstFormat::pix_value_ptr(dst);
-            const SrcFormat::pixel_type* src_pix = SrcFormat::pix_value_ptr(src);
+            typename DstFormat::pixel_type* dst_pix = DstFormat::pix_value_ptr(dst);
+            const typename SrcFormat::pixel_type* src_pix = SrcFormat::pix_value_ptr(src);
             conv_pixel<DstFormat, SrcFormat> conv;
             do
             {
