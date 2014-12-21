@@ -1395,24 +1395,24 @@ namespace agg
             pixel_type* p = img.pix_value_ptr(x, y, w);
 
             pixel_type c[3];
-            pixel_type* pc0 = c;
-            pixel_type* pc1 = c + 1;
-            pixel_type* pc2 = c + 2;
+            pixel_type* p0 = c;
+            pixel_type* p1 = c + 1;
+            pixel_type* p2 = c + 2;
             pixel_type* end = c + 3;
-            *pc0 = *pc1 = *p;
+            *p0 = *p1 = *p;
 
             for (int x = 0; x < wm; ++x)
             {
-                *pc2 = *p++;
+                *p2 = *(p = p->next());
 
-                calc_pixel(*pc0++, *pc1++, *pc2++, *row++);
+                calc_pixel(*p0++, *p1++, *p2++, *row++);
 
-                if (pc0 == end) pc0 = c;
-                else if (pc1 == end) pc1 = c;
-                else if (pc2 == end) pc2 = c;
+                if (p0 == end) p0 = c;
+                else if (p1 == end) p1 = c;
+                else if (p2 == end) p2 = c;
             }
 
-            calc_pixel(*pc0, *pc1, *pc1, *row);
+            calc_pixel(*p0, *p1, *p1, *row);
         }
 
         void calc_pixel(
@@ -1431,8 +1431,7 @@ namespace agg
             pixel_type & x,
             pixfmt_gray_tag)
         {
-            enum { Y = order_type::Y };
-            x.c[Y] = calc_value(c1.c[Y], c2.c[Y], c3.c[Y]);
+            x.c[0] = calc_value(c1.c[0], c2.c[0], c3.c[0]);
         }
 
         void calc_pixel(
